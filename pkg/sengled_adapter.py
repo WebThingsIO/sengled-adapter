@@ -24,7 +24,7 @@ class SengledAdapter(Adapter):
                          'sengled-adapter',
                          verbose=verbose)
 
-        self.manager = None
+        self.client = None
 
         database = Database(self.package_name)
         if database.open():
