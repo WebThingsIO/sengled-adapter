@@ -1,7 +1,7 @@
 {
   "name": "sengled-adapter",
   "display_name": "Sengled",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Sengled Wi-Fi bulb adapter plugin for Mozilla WebThings Gateway",
   "author": "Mozilla IoT",
   "main": "main.py",
@@ -22,9 +22,11 @@
   },
   "files": [
     "LICENSE",
+    "README.md",
     "SHA256SUMS",
     "lib",
     "main.py",
+    "manifest.json",
     "pkg/__init__.py",
     "pkg/client.py",
     "pkg/sengled_adapter.py",
