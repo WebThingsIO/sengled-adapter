@@ -1,7 +1,6 @@
 """Sengled adapter for Mozilla WebThings Gateway."""
 
 from gateway_addon import Device
-import time
 
 from .sengled_property import SengledProperty
 
