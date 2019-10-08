@@ -285,7 +285,6 @@ class SengledClient:
         password -- password for Sengled mobile app
         """
         self._uuid = uuid4().hex[:-16]
-        self._client_id = '{}@wifielementapp'.format(str(uuid4()))
         self._username = username
         self._password = password
         self._jsession_id = None
@@ -455,14 +454,14 @@ class SengledClient:
     def _initialize_mqtt(self):
         """Initialize the MQTT connection."""
         if not self._jsession_id:
-            return
+            return False
 
         def on_message(client, userdata, msg):
             if msg.topic in self._subscribed:
                 self._subscribed[msg.topic](msg.payload)
 
         self._mqtt_client = mqtt.Client(
-            client_id=self._client_id,
+            client_id='{}@lifeApp'.format(self._jsession_id),
             transport='websockets'
         )
         self._mqtt_client.tls_set_context()
@@ -470,6 +469,7 @@ class SengledClient:
             path=self._mqtt_server['path'],
             headers={
                 'Cookie': 'JSESSIONID={}'.format(self._jsession_id),
+                'X-Requested-With': 'com.sengled.life2',
             },
         )
         self._mqtt_client.on_message = on_message
@@ -480,10 +480,12 @@ class SengledClient:
         )
         self._mqtt_client.loop_start()
 
+        return True
+
     def _reinitialize_mqtt(self):
         """Re-initialize the MQTT connection."""
         if self._mqtt_client is None or not self._jsession_id:
-            return
+            return False
 
         self._mqtt_client.loop_stop()
         self._mqtt_client.disconnect()
@@ -498,6 +500,8 @@ class SengledClient:
 
         for topic in self._subscribed:
             self._subscribe_mqtt(topic, self._subscribed[topic])
+
+        return True
 
     def _publish_mqtt(self, topic, payload=None):
         """
