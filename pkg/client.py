@@ -435,7 +435,7 @@ class SengledClient:
             return self._devices
 
         data = r.json()
-        if 'deviceList' not in data:
+        if 'deviceList' not in data or not data['deviceList']:
             return self._devices
 
         for d in data['deviceList']:
