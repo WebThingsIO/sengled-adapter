@@ -34,7 +34,7 @@ class SengledDevice(Device):
             'on',
             {
                 '@type': 'OnOffProperty',
-                'label': 'On/Off',
+                'title': 'On/Off',
                 'type': 'boolean',
             },
             self.on
@@ -45,7 +45,7 @@ class SengledDevice(Device):
             'level',
             {
                 '@type': 'BrightnessProperty',
-                'label': 'Brightness',
+                'title': 'Brightness',
                 'type': 'integer',
                 'unit': 'percent',
                 'minimum': 0,
