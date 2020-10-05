@@ -1,4 +1,4 @@
-"""Sengled adapter for Mozilla WebThings Gateway."""
+"""Sengled adapter for WebThings Gateway."""
 
 from gateway_addon import Adapter, Database
 
